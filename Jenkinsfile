@@ -4,14 +4,14 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'python:3.10-alpine'
+                    image 'python:2-alpine'
                 }
             }
             steps {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
-        }  
-         stage('Test') {
+        }
+        stage('Test') {
             agent {
                 docker {
                     image 'qnib/pytest'
@@ -40,6 +40,6 @@ pipeline {
                     archiveArtifacts 'dist/add2vals'
                 }
             }
-        }   
-    }    
+        }
+    }
 }
